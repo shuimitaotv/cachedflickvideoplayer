@@ -68,6 +68,11 @@ class FlickPortraitControls extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: <Widget>[
+                  Container(
+                    child: FlickVideoProgressBar(
+                      flickProgressBarSettings: progressBarSettings,
+                    ),
+                  ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
@@ -108,13 +113,6 @@ class FlickPortraitControls extends StatelessWidget {
                       ),
                       SizedBox(
                         width: iconSize / 2,
-                      ),
-                      Expanded(
-                        child: Container(
-                          child: FlickVideoProgressBar(
-                            flickProgressBarSettings: progressBarSettings,
-                          ),
-                        ),
                       ),
                       SizedBox(
                         width: iconSize / 2,
