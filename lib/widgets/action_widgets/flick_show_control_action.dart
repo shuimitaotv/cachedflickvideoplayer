@@ -26,6 +26,8 @@ class FlickShowControlsAction extends StatelessWidget {
   Widget build(BuildContext context) {
     FlickDisplayManager displayManager =
         Provider.of<FlickDisplayManager>(context);
+    FlickControlManager controlManager =
+        Provider.of<FlickControlManager>(context);
     return Container(
       child: GestureDetector(
         key: key,
@@ -37,6 +39,9 @@ class FlickShowControlsAction extends StatelessWidget {
           } else {
             displayManager.handleVideoTap();
           }
+        },
+        onDoubleTap: () {
+          controlManager.togglePlay();
         },
       ),
     );

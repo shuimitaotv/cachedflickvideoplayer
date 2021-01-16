@@ -1,5 +1,5 @@
 import 'package:cached_video_player/cached_video_player.dart';
-import 'package:cachedflickvideoplayer/controls/flick_landscape_controls.dart';
+import 'package:cachedflickvideoplayer/controls/flick_portrait_controls.dart';
 import 'package:cachedflickvideoplayer/controls/flick_video_with_controls.dart';
 import 'package:cachedflickvideoplayer/flick_video_player.dart';
 import 'package:cachedflickvideoplayer/manager/flick_manager.dart';
@@ -28,27 +28,20 @@ class _ViewPageState extends State<ViewPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: ListView(
-      children: <Widget>[
-        Card(
-          margin: const EdgeInsets.fromLTRB(20, 20, 20, 100),
-          child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Container(
-                    padding: const EdgeInsets.all(8),
-                    height: 300,
-                    child: FlickVideoPlayer(
-                      flickManager: flickManager,
-                      flickVideoWithControlsFullscreen: FlickVideoWithControls(
-                        videoFit: BoxFit.contain,
-                        controls: FlickLandscapeControls(),
-                      ),
-                    )),
-              ]),
-        ),
-      ],
-    ));
+        body: Container(
+            child: AspectRatio(
+                aspectRatio: 16 / 9,
+                child: FlickVideoPlayer(
+                  flickManager: flickManager,
+                  flickVideoWithControls: FlickVideoWithControls(
+                    videoFit: BoxFit.contain,
+                    controls: FlickPortraitControls(),
+                  ),
+                  flickVideoWithControlsFullscreen: FlickVideoWithControls(
+                    videoFit: BoxFit.contain,
+                    controls: FlickPortraitControls(),
+                  ),
+                ))));
   }
 
   @override
@@ -60,7 +53,7 @@ class _ViewPageState extends State<ViewPage> {
   FlickManager initVideo() {
     return FlickManager(
       cachedVideoPlayerController: CachedVideoPlayerController.network(
-          'https://media.istockphoto.com/videos/blurred-motion-of-people-in-restaurant-blur-background-video-id1190840021'),
+          'https://cdn.smtvideosplay.com:9394/20201229/BwZ9laNp/index.m3u8'),
     );
   }
 }

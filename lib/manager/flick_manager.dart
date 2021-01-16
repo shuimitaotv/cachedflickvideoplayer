@@ -3,6 +3,7 @@ library flick_manager;
 import 'dart:async';
 import 'package:cached_video_player/cached_video_player.dart';
 import 'package:flutter/material.dart';
+import 'package:screen/screen.dart';
 
 part 'video_manager.dart';
 part 'control_manager.dart';

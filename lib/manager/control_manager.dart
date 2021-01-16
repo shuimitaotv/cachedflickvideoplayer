@@ -108,7 +108,8 @@ class FlickControlManager extends ChangeNotifier {
   /// Seek video forward by the duration.
   Future<void> seekForward(Duration videoSeekDuration) async {
     _flickManager._handleVideoSeek(forward: true);
-    await seekTo(_cachedVideoPlayerController.value.position + videoSeekDuration);
+    await seekTo(
+        _cachedVideoPlayerController.value.position + videoSeekDuration);
   }
 
   /// Seek video backward by the duration.

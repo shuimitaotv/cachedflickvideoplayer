@@ -1,8 +1,10 @@
-import 'package:cachedflickvideoplayer/widgets/action_widgets/flick_seek_video_action.dart';
+import 'package:cachedflickvideoplayer/widgets/action_widgets/flick_seek_video_action_2.dart';
 import 'package:cachedflickvideoplayer/widgets/action_widgets/flick_show_control_action.dart';
 import 'package:cachedflickvideoplayer/widgets/flick_current_position.dart';
 import 'package:cachedflickvideoplayer/widgets/flick_full_screen_toggle.dart';
 import 'package:cachedflickvideoplayer/widgets/flick_play_toggle.dart';
+import 'package:cachedflickvideoplayer/widgets/flick_seek_forward.dart';
+import 'package:cachedflickvideoplayer/widgets/flick_seek_replay.dart';
 import 'package:cachedflickvideoplayer/widgets/flick_sound_toggle.dart';
 import 'package:cachedflickvideoplayer/widgets/flick_total_duration.dart';
 import 'package:cachedflickvideoplayer/widgets/flick_video_buffer.dart';
@@ -66,19 +68,22 @@ class FlickPortraitControls extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: <Widget>[
-                  FlickVideoProgressBar(
-                    flickProgressBarSettings: progressBarSettings,
-                  ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
+                      FlickSeekReplay(
+                        size: iconSize,
+                      ),
+                      SizedBox(
+                        width: iconSize / 2,
+                      ),
                       FlickPlayToggle(
                         size: iconSize,
                       ),
                       SizedBox(
                         width: iconSize / 2,
                       ),
-                      FlickSoundToggle(
+                      FlickSeekForward(
                         size: iconSize,
                       ),
                       SizedBox(
@@ -101,8 +106,24 @@ class FlickPortraitControls extends StatelessWidget {
                           ),
                         ],
                       ),
+                      SizedBox(
+                        width: iconSize / 2,
+                      ),
                       Expanded(
-                        child: Container(),
+                        child: Container(
+                          child: FlickVideoProgressBar(
+                            flickProgressBarSettings: progressBarSettings,
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        width: iconSize / 2,
+                      ),
+                      FlickSoundToggle(
+                        size: iconSize,
+                      ),
+                      SizedBox(
+                        width: iconSize / 2,
                       ),
                       FlickFullScreenToggle(
                         size: iconSize,

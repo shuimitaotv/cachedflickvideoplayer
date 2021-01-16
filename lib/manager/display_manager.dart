@@ -12,9 +12,15 @@ class FlickDisplayManager extends ChangeNotifier {
   final FlickManager _flickManager;
   bool _mounted = true;
   Timer _showPlayerControlsTimer;
+  Timer _showVolumeTimer;
+  Timer _showBrightnessTimer;
   bool _showPlayerControls = true;
   bool _showForwardSeek = false;
   bool _showBackwardSeek = false;
+  bool _showSeekTime = false;
+  bool _showVolume = false;
+  bool _showBrightness = false;
+  double _brightness = 0.0;
 
   /// Show player controls or not.
   bool get showPlayerControls => _showPlayerControls;
@@ -24,6 +30,27 @@ class FlickDisplayManager extends ChangeNotifier {
 
   // Show backward seek icon or not.
   bool get showBackwardSeek => _showBackwardSeek;
+
+  // Show backward seek icon or not.
+  bool get showSeekTime => _showSeekTime;
+
+  // Show showVolume icon or not.
+  bool get showVolume => _showVolume;
+
+  // Show showBrightness icon or not.
+  bool get showBrightness => _showBrightness;
+
+  double get brightness => _brightness;
+
+  setFirstBrightness() {
+    Screen.brightness.then((b) => {_brightness = b});
+  }
+
+  setBrightness(double brightness) {
+    if (brightness != _brightness) {
+      Screen.setBrightness(brightness);
+    }
+  }
 
   /// User video tap action.
   handleVideoTap() {
@@ -38,6 +65,55 @@ class FlickDisplayManager extends ChangeNotifier {
       // show player controls.
       handleShowPlayerControls();
     }
+  }
+
+  handleShowVolume({bool show = true}) {
+    _showVolume = show;
+    // Cancel any previously running timer.
+    _showVolumeTimer?.cancel();
+    _notify();
+    if (show) {
+      // Timer duration fetched through channel, passing the current player information.
+      _showVolumeTimer = Timer(Duration(milliseconds: 1000), () {
+        _showVolume = false;
+        _notify();
+      });
+    }
+  }
+
+  handleShowBrightness({bool show = true}) {
+    _showBrightness = show;
+    // Cancel any previously running timer.
+    _showBrightnessTimer?.cancel();
+    _notify();
+    if (show) {
+      // Timer duration fetched through channel, passing the current player information.
+      _showBrightnessTimer = Timer(Duration(milliseconds: 1000), () {
+        _showBrightness = false;
+        _notify();
+      });
+    }
+  }
+
+  handleTogglePlayerControls({bool show}) {
+    // If playerControls are showing,
+    // cancel the hide timer and hide the controls.
+    if (!show) {
+      _showPlayerControls = false;
+      _showPlayerControlsTimer?.cancel();
+      _notify();
+    } else {
+      // If playerControls are not showing,
+      // show player controls.
+      handleShowPlayerControls();
+    }
+  }
+
+  // Called when user calls seekForward or seekBackward
+  // on the controlManager.
+  handleSeekTime({bool show}) {
+    _showSeekTime = show;
+    _notify();
   }
 
   /// Show the player controls.
