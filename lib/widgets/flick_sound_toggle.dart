@@ -49,6 +49,8 @@ class FlickSoundToggle extends StatelessWidget {
   Widget build(BuildContext context) {
     FlickControlManager controlManager =
         Provider.of<FlickControlManager>(context);
+    FlickDisplayManager displayManager =
+        Provider.of<FlickDisplayManager>(context);
 
     Widget muteWidget = muteChild ??
         Icon(
@@ -68,6 +70,7 @@ class FlickSoundToggle extends StatelessWidget {
     return GestureDetector(
         key: key,
         onTap: () {
+          displayManager.handleShowPlayerControls();
           if (toggleMute != null) {
             toggleMute();
           } else {

@@ -49,7 +49,8 @@ class FlickSeekReplay extends StatelessWidget {
   Widget build(BuildContext context) {
     FlickControlManager controlManager =
         Provider.of<FlickControlManager>(context);
-
+    FlickDisplayManager displayManager =
+        Provider.of<FlickDisplayManager>(context);
     Widget seekWidget = seekChild ??
         Icon(
           Icons.replay_10,
@@ -61,6 +62,7 @@ class FlickSeekReplay extends StatelessWidget {
     return GestureDetector(
         key: key,
         onTap: () {
+          displayManager.handleShowPlayerControls();
           if (seekReplay != null) {
             seekReplay();
           } else {

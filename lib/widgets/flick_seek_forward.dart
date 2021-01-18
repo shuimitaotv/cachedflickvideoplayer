@@ -50,6 +50,8 @@ class FlickSeekForward extends StatelessWidget {
     FlickControlManager controlManager =
         Provider.of<FlickControlManager>(context);
     FlickVideoManager videoManager = Provider.of<FlickVideoManager>(context);
+    FlickDisplayManager displayManager =
+        Provider.of<FlickDisplayManager>(context);
 
     Widget seekWidget = seekChild ??
         Icon(
@@ -62,6 +64,7 @@ class FlickSeekForward extends StatelessWidget {
     return GestureDetector(
         key: key,
         onTap: () {
+          displayManager.handleShowPlayerControls();
           if (seekForward != null) {
             seekForward();
           } else {

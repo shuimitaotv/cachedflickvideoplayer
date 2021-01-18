@@ -114,9 +114,6 @@ class FlickPortraitControls extends StatelessWidget {
                       SizedBox(
                         width: iconSize / 2,
                       ),
-                      SizedBox(
-                        width: iconSize / 2,
-                      ),
                       FlickSoundToggle(
                         size: iconSize,
                       ),

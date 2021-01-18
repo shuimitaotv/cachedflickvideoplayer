@@ -58,7 +58,8 @@ class FlickPlayToggle extends StatelessWidget {
     FlickControlManager controlManager =
         Provider.of<FlickControlManager>(context);
     FlickVideoManager videoManager = Provider.of<FlickVideoManager>(context);
-
+    FlickDisplayManager displayManager =
+        Provider.of<FlickDisplayManager>(context);
     Widget playWidget = playChild ??
         Icon(
           Icons.play_arrow,
@@ -80,11 +81,14 @@ class FlickPlayToggle extends StatelessWidget {
 
     Widget child = videoManager.isVideoEnded
         ? replayWidget
-        : videoManager.isPlaying ? pauseWidget : playWidget;
+        : videoManager.isPlaying
+            ? pauseWidget
+            : playWidget;
 
     return GestureDetector(
         key: key,
         onTap: () {
+          displayManager.handleShowPlayerControls();
           if (togglePlay != null) {
             togglePlay();
           } else {
